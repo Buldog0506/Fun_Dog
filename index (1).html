@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARCHIVE LOCKED</title>
+
+<style>
+body{
+    background:#000;
+    color:#d0d0d0;
+    font-family:Consolas,monospace;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    margin:0;
+    text-align:center;
+}
+
+h1{
+    letter-spacing:4px;
+    font-weight:normal;
+}
+
+#timer{
+    font-size:3rem;
+    margin:20px 0;
+}
+
+#layerLink{
+    display:none;
+}
+
+a{
+    color:white;
+    text-decoration:none;
+    border:1px solid #666;
+    padding:12px 24px;
+}
+
+a:hover{
+    background:#111;
+}
+</style>
+</head>
+<body>
+
+<h1>ARCHIVE LOCKED</h1>
+
+<p>Transmission initialized: 04.06.2026 22:00</p>
+
+<div id="timer"></div>
+
+<div id="layerLink">
+    <p>TRANSMISSION RECEIVED</p>
+    <p>New archive layer detected.</p>
+
+    <a href="layer_2.html">
+        OPEN LAYER II
+    </a>
+</div>
+
+<script>
+
+// 5 июня 2026, 10:00
+const targetDate = new Date("2026-06-05T10:00:00").getTime();
+
+const timer = document.getElementById("timer");
+const layerLink = document.getElementById("layerLink");
+
+function updateTimer(){
+
+    const now = Date.now();
+    const distance = targetDate - now;
+
+    if(distance <= 0){
+
+        timer.style.display = "none";
+        layerLink.style.display = "block";
+
+        return;
+    }
+
+    const hours = Math.floor(distance / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    timer.textContent =
+        `${hours}h ${minutes}m ${seconds}s`;
+}
+
+updateTimer();
+setInterval(updateTimer,1000);
+
+</script>
+
+</body>
+</html>
